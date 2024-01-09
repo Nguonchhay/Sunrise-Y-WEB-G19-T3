@@ -4,7 +4,9 @@ This repository is for study purpose.
 
 ## Features
 
-TO BE WRITTEN
+1. AA
+2. BB
+3. CC
 
 ## How to install
 
