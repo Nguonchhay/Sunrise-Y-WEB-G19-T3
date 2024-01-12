@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('pageTitle')Carts @endsection
+@section('pageTitle')Cart @endsection
 
 @section('breadcrumb_heading')
     Cart

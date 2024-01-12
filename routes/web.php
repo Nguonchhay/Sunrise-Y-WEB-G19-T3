@@ -19,6 +19,8 @@ Route::get('/contact', [App\Http\Controllers\PageController::class, 'contact'])-
 
 Auth::routes();
 
+Route::get('/backends', [App\Http\Controllers\Backends\DashboardController::class, 'index'])->name('backends.dashboard');
+
 Route::get('/backends/users', [App\Http\Controllers\Backends\UserController::class, 'index'])->name('users.index');
 Route::get('/backends/users/create', [App\Http\Controllers\Backends\UserController::class, 'create'])->name('users.create');
 Route::post('/backends/users', [App\Http\Controllers\Backends\UserController::class, 'store'])->name('users.store');
