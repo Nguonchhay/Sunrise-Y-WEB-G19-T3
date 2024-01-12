@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\PageController::class, 'home'])->name('pages.home');
+Route::get('/cart', [App\Http\Controllers\PageController::class, 'cart'])->name('pages.cart');
+Route::get('/contact', [App\Http\Controllers\PageController::class, 'contact'])->name('pages.contact');
 
 Auth::routes();
 

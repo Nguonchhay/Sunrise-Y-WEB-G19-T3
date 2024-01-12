@@ -19,8 +19,8 @@
 
         @include('includes.page_nav')
 
-         <!-- Modal Search Start -->
-         <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- Modal Search Start -->
+        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content rounded-0">
                     <div class="modal-header">
@@ -37,17 +37,6 @@
             </div>
         </div>
         <!-- Modal Search End -->
-
-        <!-- Single Page Header start -->
-        <div class="container-fluid page-header py-5">
-            <h1 class="text-center text-white display-6">@yield('breadcrumb_heading')</h1>
-            <ol class="breadcrumb justify-content-center mb-0">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                @yield('breadcrumb_label')
-                <!-- <li class="breadcrumb-item active text-white">Cart</li> -->
-            </ol>
-        </div>
-        <!-- Single Page Header End -->
 
         @yield('content')
 
