@@ -19,8 +19,23 @@ Route::get('/contact', [App\Http\Controllers\PageController::class, 'contact'])-
 
 Auth::routes();
 
-Route::get('/backends', [App\Http\Controllers\Backends\DashboardController::class, 'index'])->name('backends.dashboard');
+Route::group([
+    'prefix' => 'backends'
+], function() {
+    Route::get('/', [App\Http\Controllers\Backends\DashboardController::class, 'index'])->name('backends.dashboard');
 
-Route::get('/backends/users', [App\Http\Controllers\Backends\UserController::class, 'index'])->name('users.index');
-Route::get('/backends/users/create', [App\Http\Controllers\Backends\UserController::class, 'create'])->name('users.create');
-Route::post('/backends/users', [App\Http\Controllers\Backends\UserController::class, 'store'])->name('users.store');
+    Route::get('/users', [App\Http\Controllers\Backends\UserController::class, 'index'])->name('users.index');
+    Route::get('/users/create', [App\Http\Controllers\Backends\UserController::class, 'create'])->name('users.create');
+    Route::post('/users', [App\Http\Controllers\Backends\UserController::class, 'store'])->name('users.store');
+
+    Route::group([
+        'prefix' => 'categories'
+    ], function() {
+        Route::get('/', [App\Http\Controllers\Backends\CategoryController::class, 'index'])->name('backends.categories.index');
+        Route::get('/create', [App\Http\Controllers\Backends\CategoryController::class, 'create'])->name('backends.categories.create');
+        Route::post('/', [App\Http\Controllers\Backends\CategoryController::class, 'store'])->name('backends.categories.store');
+        Route::get('/{category}/edit', [App\Http\Controllers\Backends\CategoryController::class, 'edit'])->name('backends.categories.edit');
+        Route::put('/{category}', [App\Http\Controllers\Backends\CategoryController::class, 'update'])->name('backends.categories.update');
+        Route::delete('/{category}', [App\Http\Controllers\Backends\CategoryController::class, 'destroy'])->name('backends.categories.delete');
+    });
+});
