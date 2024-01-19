@@ -28,7 +28,18 @@
                             <td>
                                 <div class="btn-group" role="group">
                                     <a href="{{ route('backends.categories.edit', $category) }}" class="btn btn-default">Edit</a>
-                                    <button type="button" class="btn btn-danger">Delete</button>
+                                    <button onclick="deleteCategory('{{ $category->id }}')" type="button" class="btn btn-danger">Delete</button>
+                                    <form id="frmCategory{{ $category->id }}" action="{{ route('backends.categories.delete', $category) }}" method="POST">
+                                        @csrf
+                                        @method("DELETE")
+                                    </form>
+                                    <script>
+                                        function deleteCategory(id) {
+                                            if (confirm('Are you sure?')) {
+                                                document.getElementById('frmCategory' + id).submit();
+                                            }
+                                        }
+                                    </script>
                                 </div>
                             </td>
                         </tr>

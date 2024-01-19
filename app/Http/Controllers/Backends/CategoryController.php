@@ -41,6 +41,7 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        // TO DO: delete existing category
+        $category->delete();
+        return redirect(route('backends.categories.index'));
     }
 }
