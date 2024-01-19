@@ -20,13 +20,14 @@ Route::get('/contact', [App\Http\Controllers\PageController::class, 'contact'])-
 Auth::routes();
 
 Route::group([
-    'prefix' => 'backends'
+    'prefix' => 'backends',
+    'middleware' => 'auth'
 ], function() {
     Route::get('/', [App\Http\Controllers\Backends\DashboardController::class, 'index'])->name('backends.dashboard');
 
-    Route::get('/users', [App\Http\Controllers\Backends\UserController::class, 'index'])->name('users.index');
-    Route::get('/users/create', [App\Http\Controllers\Backends\UserController::class, 'create'])->name('users.create');
-    Route::post('/users', [App\Http\Controllers\Backends\UserController::class, 'store'])->name('users.store');
+    Route::get('/users', [App\Http\Controllers\Backends\UserController::class, 'index'])->name('backends.users.index');
+    Route::get('/users/create', [App\Http\Controllers\Backends\UserController::class, 'create'])->name('backends.users.create');
+    Route::post('/users', [App\Http\Controllers\Backends\UserController::class, 'store'])->name('backends.users.store');
 
     Route::group([
         'prefix' => 'categories'

@@ -68,6 +68,14 @@
                                 </button>
                             </div>
                         </div>
+
+                        <div class="row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <a class="btn btn-link" href="{{ route('login') }}">
+                                    {{ __('Already has an account?') }}
+                                </a>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -30,6 +30,12 @@
                                                         <span></span>
                                                     </div>
                                                 </li>
+                                                <li>
+                                                    <div class="d-flex justify-content-between fruite-name">
+                                                        <a href="{{ route('backends.users.index') }}"><i class="fas fa-apple-alt me-2"></i>Users</a>
+                                                        <span></span>
+                                                    </div>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>

@@ -18,7 +18,7 @@
             <tbody>
                 @if($categories->isEmpty())
                     <tr>
-                        <td>There is no record</td>
+                        <td colspan="3">There is no record</td>
                     </tr>
                 @else
                     @foreach($categories as $category)

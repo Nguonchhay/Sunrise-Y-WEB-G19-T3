@@ -38,7 +38,19 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        User::create($request->all());
-        return redirect(route('users.index'));
+        $userData = $request->all();
+
+        $file = $request->file('image');
+        if ($file) {
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $filenameAndPath =  'users/' . $filename . '.' . $extension;
+
+            $file->storeAs('public/' . $filenameAndPath);
+            $userData['profile'] = 'storage/' . $filenameAndPath;
+        }
+
+        User::create($userData);
+        return redirect(route('backends.users.index'));
     }
 }
