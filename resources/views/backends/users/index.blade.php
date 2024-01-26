@@ -28,7 +28,6 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
-                            {{public_path($user->profile)}}
                             @if($user->profile)
                                 <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalUser{{ $user->id }}">
                                     <i class="fas fa-image fa-2x"></i>
@@ -38,7 +37,7 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-body">
-                                                <img src="{{ public_path($user->profile) }}" class="w-100" />
+                                                <img src="{{ asset($user->profile) }}" class="w-100" />
                                             </div>
                                         </div>
                                     </div>
