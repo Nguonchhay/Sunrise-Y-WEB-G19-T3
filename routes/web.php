@@ -39,4 +39,8 @@ Route::group([
         Route::put('/{category}', [App\Http\Controllers\Backends\CategoryController::class, 'update'])->name('backends.categories.update');
         Route::delete('/{category}', [App\Http\Controllers\Backends\CategoryController::class, 'destroy'])->name('backends.categories.delete');
     });
+
+    Route::resource('products', App\Http\Controllers\Backends\ProductController::class, [
+        'as' => 'backends'
+    ]);
 });
