@@ -41,6 +41,13 @@ class ProductController extends Controller
         return redirect(route('backends.products.index'));
     }
 
+    public function show(Product $product)
+    {
+        return view('backends.products.show', [
+            'product' => $product
+        ]);
+    }
+
     public function edit(Product $product)
     {
         $categories = Category::pluck('title', 'id');
