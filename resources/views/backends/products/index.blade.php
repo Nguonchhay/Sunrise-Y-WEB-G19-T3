@@ -52,7 +52,7 @@
                                     <a href="{{ route('backends.products.show', $product) }}" class="btn btn-default">Detail</a>
                                     <a href="{{ route('backends.products.edit', $product) }}" class="btn btn-default">Edit</a>
                                     <button onclick="deleteProduct('{{ $product->id }}')" type="button" class="btn btn-danger">Delete</button>
-                                    <form id="frmProduct{{ $product->id }}" action="{{ route('backends.products.delete', $product) }}" method="POST">
+                                    <form id="frmProduct{{ $product->id }}" action="{{ route('backends.products.destroy', $product) }}" method="POST">
                                         @csrf
                                         @method("DELETE")
                                     </form>

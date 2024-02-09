@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backends;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
@@ -16,12 +17,26 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('backends.products.create');
+        $categories = Category::pluck('title', 'id');
+        return view('backends.products.create')->with('categories', $categories);
     }
 
     public function store(Request $request)
     {
-        Product::create($request->all());
+        $productData = $request->all();
+        $file = $request->file('image');
+        if (!$file) {
+            return back();
+        }
+
+        $filename = time() . '_' . $file->getClientOriginalName();
+        $extension = $file->getClientOriginalExtension();
+        $filenameAndPath =  'products/' . $filename . '.' . $extension;
+
+        $file->storeAs('public/' . $filenameAndPath);
+        $productData['image_url'] = 'storage/' . $filenameAndPath;
+
+        Product::create($productData);
         return redirect(route('backends.products.index'));
     }
 
