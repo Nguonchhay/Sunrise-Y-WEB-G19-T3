@@ -82,7 +82,7 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        $category->delete();
+        $product->delete();
         return redirect(route('backends.products.index'));
     }
 }
