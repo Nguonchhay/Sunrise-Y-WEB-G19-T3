@@ -75,14 +75,15 @@ class ProductController extends Controller
         }
 
         $product->update($productData);
-        // $product->title = $request->get('title');
-        // $product->save();
         return redirect(route('backends.products.index'));
     }
 
     public function destroy(Product $product)
     {
+        $imageUrl = $product->image_url;
         $product->delete();
+        // Delete old image
+        File::delete($imageUrl);
         return redirect(route('backends.products.index'));
     }
 }
