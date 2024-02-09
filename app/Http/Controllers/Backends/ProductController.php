@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backends;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use App\Models\Product;
 use App\Models\Category;
 
@@ -42,15 +43,33 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
+        $categories = Category::pluck('title', 'id');
         return view('backends.products.edit', [
-            'product' => $product
+            'product' => $product,
+            'categories' => $categories
         ]);
     }
 
     public function update(Product $product, Request $request)
     {
-        $product->title = $request->get('title');
-        $product->save();
+        $productData = $request->all();
+
+        $file = $request->file('image');
+        if ($file) {
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $filenameAndPath =  'products/' . $filename . '.' . $extension;
+
+            $file->storeAs('public/' . $filenameAndPath);
+            $productData['image_url'] = 'storage/' . $filenameAndPath;
+
+            // Delete old image
+            File::delete($product->image_url);
+        }
+
+        $product->update($productData);
+        // $product->title = $request->get('title');
+        // $product->save();
         return redirect(route('backends.products.index'));
     }
 
