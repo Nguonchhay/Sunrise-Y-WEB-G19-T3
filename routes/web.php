@@ -17,6 +17,9 @@ Route::get('/', [App\Http\Controllers\PageController::class, 'home'])->name('pag
 Route::get('/cart', [App\Http\Controllers\PageController::class, 'cart'])->name('pages.cart');
 Route::get('/contact', [App\Http\Controllers\PageController::class, 'contact'])->name('pages.contact');
 
+// Cart
+Route::post('/carts', [App\Http\Controllers\CartController::class, 'store'])->middleware('auth')->name('carts.store');
+
 Auth::routes();
 
 Route::group([
