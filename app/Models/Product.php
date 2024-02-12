@@ -28,4 +28,9 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function getTotalPrice($qty)
+    {
+        return $this->unit_price * $qty;
+    }
 }

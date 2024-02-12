@@ -40,9 +40,8 @@
                                                         <p>{{ $product->description }}</p>
                                                         <div class="d-flex justify-content-between flex-lg-wrap">
                                                             <p class="text-dark fs-5 fw-bold mb-0">${{ $product->unit_price }} / kg</p>
-                                                            <form id="frmCartAdd{{ $product->id }}" action="{{ route('carts.store') }}" method="POST">
+                                                            <form id="frmCartAdd{{ $product->id }}" action="{{ route('carts.store', $product) }}" method="POST">
                                                                 @csrf
-                                                                <input type="hidden" name="product_id" value="{{ $product->id }}"/>
                                                             </form>
                                                             <a href="#" onclick="document.getElementById('frmCartAdd{{ $product->id }}').submit();" class="btn border border-secondary rounded-pill px-3 text-primary">
                                                                 <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart

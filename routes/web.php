@@ -14,11 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [App\Http\Controllers\PageController::class, 'home'])->name('pages.home');
-Route::get('/cart', [App\Http\Controllers\PageController::class, 'cart'])->name('pages.cart');
 Route::get('/contact', [App\Http\Controllers\PageController::class, 'contact'])->name('pages.contact');
 
 // Cart
-Route::post('/carts', [App\Http\Controllers\CartController::class, 'store'])->middleware('auth')->name('carts.store');
+Route::get('/carts', [App\Http\Controllers\CartController::class, 'index'])->middleware('auth')->name('carts.index');
+Route::post('/carts/{product}', [App\Http\Controllers\CartController::class, 'store'])->middleware('auth')->name('carts.store');
+
 
 Auth::routes();
 

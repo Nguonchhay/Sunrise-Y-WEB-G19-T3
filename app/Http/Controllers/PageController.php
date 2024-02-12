@@ -15,11 +15,6 @@ class PageController extends Controller
         ]);
     }
 
-    public function cart()
-    {
-        return view('pages.cart');
-    }
-
     public function contact()
     {
         return view('pages.contact');
