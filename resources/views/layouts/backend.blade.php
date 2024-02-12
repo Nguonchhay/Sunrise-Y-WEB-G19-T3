@@ -42,6 +42,22 @@
                                                         <span></span>
                                                     </div>
                                                 </li>
+                                                <li>
+                                                    <div class="d-flex justify-content-between fruite-name">
+                                                        <a href="#" onclick="logoutUser()" ><i class="fas fa-apple-alt me-2"></i>Logout</a>
+                                                        <span></span>
+                                                        <form id="frmLogout" action="{{ route('logout') }}" method="POST">
+                                                            @csrf
+                                                        </form>
+                                                        <script>
+                                                            function logoutUser() {
+                                                                if (confirm('Are you sure?')) {
+                                                                    document.getElementById('frmLogout').submit();
+                                                                }
+                                                            }
+                                                        </script>
+                                                    </div>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>

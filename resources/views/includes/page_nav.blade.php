@@ -34,6 +34,9 @@
                             </a>
                             <a href="{{ route('login') }}" class="my-auto">
                                 <i class="fas fa-user fa-2x"></i>
+                                @if(Auth::id())
+                                    {{ Auth::user()->name }}
+                                @endif
                             </a>
                         </div>
                     </div>
