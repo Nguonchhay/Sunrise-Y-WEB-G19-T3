@@ -30,6 +30,14 @@ class CartController extends Controller
         return redirect(route('carts.index'));
     }
 
+    public function updateQuantity(Cart $cart, Request $request)
+    {
+        $qty = intval($request->get('new_qty'));
+        $cart->qty = $qty < 1 ? 1 : $qty;
+        $cart->save();
+        return redirect(route('carts.index'));
+    }
+
     public function destroy(Cart $cart)
     {
         $cart->delete();

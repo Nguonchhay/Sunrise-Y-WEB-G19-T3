@@ -18,6 +18,7 @@ Route::get('/contact', [App\Http\Controllers\PageController::class, 'contact'])-
 
 // Cart
 Route::get('/carts', [App\Http\Controllers\CartController::class, 'index'])->middleware('auth')->name('carts.index');
+Route::put('/carts/qty/{cart}', [App\Http\Controllers\CartController::class, 'updateQuantity'])->middleware('auth')->name('carts.update.qty');
 Route::post('/carts/{product}', [App\Http\Controllers\CartController::class, 'store'])->middleware('auth')->name('carts.store');
 Route::delete('/carts/{cart}', [App\Http\Controllers\CartController::class, 'destroy'])->middleware('auth')->name('carts.destroy');
 
