@@ -13,8 +13,17 @@ class CartController extends Controller
     public function index()
     {
         $carts = Cart::where('user_id', Auth::id())->orderBy('created_at', 'DESC')->get();
+        $subTotal = 0.0;
+        $total = 0.0;
+        foreach ($carts as $cart) {
+            $subTotal += $cart->total;
+            $total += $cart->total;
+        }
+
         return view('pages.carts.index', [
-            'carts' => $carts
+            'carts' => $carts,
+            'subTotal' => $subTotal,
+            'total' => $total
         ]);
     }
 
@@ -34,6 +43,7 @@ class CartController extends Controller
     {
         $qty = intval($request->get('new_qty'));
         $cart->qty = $qty < 1 ? 1 : $qty;
+        $cart->total = $cart->product->getTotalPrice($cart->qty);
         $cart->save();
         return redirect(route('carts.index'));
     }
