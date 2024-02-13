@@ -16,12 +16,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [App\Http\Controllers\PageController::class, 'home'])->name('pages.home');
 Route::get('/contact', [App\Http\Controllers\PageController::class, 'contact'])->name('pages.contact');
 
-// Cart
-Route::get('/carts', [App\Http\Controllers\CartController::class, 'index'])->middleware('auth')->name('carts.index');
-Route::put('/carts/qty/{cart}', [App\Http\Controllers\CartController::class, 'updateQuantity'])->middleware('auth')->name('carts.update.qty');
-Route::post('/carts/{product}', [App\Http\Controllers\CartController::class, 'store'])->middleware('auth')->name('carts.store');
-Route::delete('/carts/{cart}', [App\Http\Controllers\CartController::class, 'destroy'])->middleware('auth')->name('carts.destroy');
+Route::group([
+    'middleware' => 'auth'
+], function() {
+    // Cart
+    Route::get('/carts', [App\Http\Controllers\CartController::class, 'index'])->name('carts.index');
+    Route::put('/carts/qty/{cart}', [App\Http\Controllers\CartController::class, 'updateQuantity'])->name('carts.update.qty');
+    Route::post('/carts/{product}', [App\Http\Controllers\CartController::class, 'store'])->name('carts.store');
+    Route::delete('/carts/{cart}', [App\Http\Controllers\CartController::class, 'destroy'])->name('carts.destroy');
 
+    // Order
+    Route::post('/orders', [App\Http\Controllers\OrderController::class, 'store'])->name('orders.store');
+});
 
 Auth::routes();
 
