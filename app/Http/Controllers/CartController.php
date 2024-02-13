@@ -29,4 +29,10 @@ class CartController extends Controller
 
         return redirect(route('carts.index'));
     }
+
+    public function destroy(Cart $cart)
+    {
+        $cart->delete();
+        return redirect(route('carts.index'));
+    }
 }

@@ -62,9 +62,13 @@
                                             <p class="mb-0 mt-4">{{ $cart->total }} $</p>
                                         </td>
                                         <td>
-                                            <button class="btn btn-md rounded-circle bg-light border mt-4" >
-                                                <i class="fa fa-times text-danger"></i>
-                                            </button>
+                                            <form action="{{ route('carts.destroy', $cart) }}" method="POST">
+                                                @csrf
+                                                @method("DELETE")
+                                                <button type="submit" class="btn btn-md rounded-circle bg-light border mt-4" >
+                                                    <i class="fa fa-times text-danger"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
