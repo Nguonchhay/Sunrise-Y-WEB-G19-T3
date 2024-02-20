@@ -33,7 +33,7 @@ Auth::routes();
 
 Route::group([
     'prefix' => 'backends',
-    'middleware' => 'auth'
+    'middleware' => ['auth', 'backend']
 ], function() {
     Route::get('/', [App\Http\Controllers\Backends\DashboardController::class, 'index'])->name('backends.dashboard');
 
