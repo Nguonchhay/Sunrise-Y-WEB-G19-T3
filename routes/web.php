@@ -35,9 +35,13 @@ Route::group([
     'prefix' => 'backends',
     'middleware' => ['auth']
 ], function() {
-    Route::get('/backends', [App\Http\Controllers\Backends\DashboardController::class, 'index'])->name('backends.dashboard');
+    Route::get('/', [App\Http\Controllers\Backends\DashboardController::class, 'index'])->name('backends.dashboard');
 
     Route::get('/users', [App\Http\Controllers\Backends\UserController::class, 'index'])->name('backends.users.index');
+
+    Route::resource('products', App\Http\Controllers\Backends\ProductController::class, [
+        'as' => 'backends'
+    ]);
 
     Route::group([
         'middleware' => ['backend']
@@ -58,9 +62,5 @@ Route::group([
             Route::put('/{category}', [App\Http\Controllers\Backends\CategoryController::class, 'update'])->name('backends.categories.update');
             Route::delete('/{category}', [App\Http\Controllers\Backends\CategoryController::class, 'destroy'])->name('backends.categories.delete');
         });
-
-        Route::resource('products', App\Http\Controllers\Backends\ProductController::class, [
-            'as' => 'backends'
-        ]);
     });    
 });

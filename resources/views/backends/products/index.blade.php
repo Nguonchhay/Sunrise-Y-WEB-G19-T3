@@ -10,6 +10,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Category</th>
+                    <th scope="col">Owner</th>
                     <th scope="col">Image</th>
                     <th scope="col">Name</th>
                     <th scope="col">Quantity In Stock</th>
@@ -28,6 +29,7 @@
                         <tr>
                             <td>{{ $loop->index + 1 }}</td>
                             <td>{{ $product->category->title }}</td>
+                            <td>{{ $product->user->name }}</td>
                             <td>
                                 @if($product->image_url)
                                     <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalProduct{{ $product->id }}">
@@ -50,19 +52,25 @@
                             <td>
                                 <div class="btn-group" role="group">
                                     <a href="{{ route('backends.products.show', $product) }}" class="btn btn-default">Detail</a>
-                                    <a href="{{ route('backends.products.edit', $product) }}" class="btn btn-default">Edit</a>
-                                    <button onclick="deleteProduct('{{ $product->id }}')" type="button" class="btn btn-danger">Delete</button>
-                                    <form id="frmProduct{{ $product->id }}" action="{{ route('backends.products.destroy', $product) }}" method="POST">
-                                        @csrf
-                                        @method("DELETE")
-                                    </form>
-                                    <script>
-                                        function deleteProduct(id) {
-                                            if (confirm('Are you sure?')) {
-                                                document.getElementById('frmProduct' + id).submit();
+                                    
+                                    @can('editProduct', $product)
+                                        <a href="{{ route('backends.products.edit', $product) }}" class="btn btn-default">Edit</a>
+                                    @endcan
+                                    
+                                    @can('deleteProduct', $product)
+                                        <button onclick="deleteProduct('{{ $product->id }}')" type="button" class="btn btn-danger">Delete</button>
+                                        <form id="frmProduct{{ $product->id }}" action="{{ route('backends.products.destroy', $product) }}" method="POST">
+                                            @csrf
+                                            @method("DELETE")
+                                        </form>
+                                        <script>
+                                            function deleteProduct(id) {
+                                                if (confirm('Are you sure?')) {
+                                                    document.getElementById('frmProduct' + id).submit();
+                                                }
                                             }
-                                        }
-                                    </script>
+                                        </script>
+                                    @endcan
                                 </div>
                             </td>
                         </tr>
