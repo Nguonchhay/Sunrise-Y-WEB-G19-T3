@@ -14,9 +14,11 @@
                     <th scope="col">Email</th>
                     <th scope="col">Profile</th>
                     <th scope="col">
-                        <a href="{{ route('backends.users.create') }}" class="btn btn-primary">
-                            New User
-                        </a>
+                        @can('userCreate')
+                            <a href="{{ route('backends.users.create') }}" class="btn btn-primary">
+                                New User
+                            </a>
+                        @endcan
                     </th>
                 </tr>
             </thead>
@@ -44,7 +46,23 @@
                                 </div> 
                             @endif
                         </td>
-                        <td></td>
+                        <td>
+                                <div class="btn-group" role="group">
+                                    <a href="{{ route('backends.users.edit', $user) }}" class="btn btn-default">Edit</a>
+                                    <button onclick="deleteUser('{{ $user->id }}')" type="button" class="btn btn-danger">Delete</button>
+                                    <form id="frmUser{{ $user->id }}" action="{{ route('backends.users.delete', $user) }}" method="POST">
+                                        @csrf
+                                        @method("DELETE")
+                                    </form>
+                                    <script>
+                                        function deleteUser(id) {
+                                            if (confirm('Are you sure?')) {
+                                                document.getElementById('frmUser' + id).submit();
+                                            }
+                                        }
+                                    </script>
+                                </div>
+                            </td>
                     </tr>
                 @endforeach
             </tbody>

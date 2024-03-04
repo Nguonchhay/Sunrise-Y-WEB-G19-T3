@@ -24,12 +24,14 @@
                                         <div class="mb-3">
                                             <h4>Menu</h4>
                                             <ul class="list-unstyled fruite-categorie">
-                                                <li>
-                                                    <div class="d-flex justify-content-between fruite-name">
-                                                        <a href="{{ route('backends.categories.index') }}"><i class="fas fa-apple-alt me-2"></i>Categories</a>
-                                                        <span></span>
-                                                    </div>
-                                                </li>
+                                                @can('categoryList')
+                                                    <li>
+                                                        <div class="d-flex justify-content-between fruite-name">
+                                                            <a href="{{ route('backends.categories.index') }}"><i class="fas fa-apple-alt me-2"></i>Categories</a>
+                                                            <span></span>
+                                                        </div>
+                                                    </li>
+                                                @endcan
                                                 <li>
                                                     <div class="d-flex justify-content-between fruite-name">
                                                         <a href="{{ route('backends.products.index') }}"><i class="fas fa-apple-alt me-2"></i>Products</a>

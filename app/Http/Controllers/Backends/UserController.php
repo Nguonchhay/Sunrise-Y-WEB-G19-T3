@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backends;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 class UserController extends Controller
@@ -25,7 +26,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::get();
+        $authUser = Auth::user();
+        $users = User::where('id', $authUser->id)->get();
+        if ($authUser->role == 'admin') {
+            $users = User::get();
+        }
+
         return view('backends.users.index', [
             'users' => $users
         ]);
