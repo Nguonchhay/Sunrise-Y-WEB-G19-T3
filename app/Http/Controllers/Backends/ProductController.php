@@ -48,8 +48,12 @@ class ProductController extends Controller
         ]);
     }
 
-    public function edit(Product $product)
+    public function edit(Product $product, Request $request)
     {
+        if ($request->user()->cannot('editProduct', $product)) {
+            return back();
+        }
+
         $categories = Category::pluck('title', 'id');
         return view('backends.products.edit', [
             'product' => $product,
@@ -59,6 +63,7 @@ class ProductController extends Controller
 
     public function update(Product $product, Request $request)
     {
+        $this->authorize('editProduct', $product);
         $productData = $request->all();
 
         $file = $request->file('image');
@@ -80,6 +85,7 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
+        $this->authorize('deleteProduct', $product);
         $imageUrl = $product->image_url;
         $product->delete();
         // Delete old image
