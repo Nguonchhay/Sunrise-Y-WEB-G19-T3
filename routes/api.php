@@ -22,6 +22,15 @@ Route::group([
     Route::delete('/{category}', [App\Http\Controllers\Api\CategoryAPIController::class, 'destroy'])->name('api.categories.delete');
 });
 
+Route::group([
+    'prefix' => 'products'
+], function() {
+    Route::get('/', [App\Http\Controllers\Api\ProductAPIController::class, 'index']);
+    Route::post('/', [App\Http\Controllers\Api\ProductAPIController::class, 'store']);
+    Route::put('/{product}', [App\Http\Controllers\Api\ProductAPIController::class, 'update']);
+    Route::delete('/{product}', [App\Http\Controllers\Api\ProductAPIController::class, 'destroy']);
+});
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
