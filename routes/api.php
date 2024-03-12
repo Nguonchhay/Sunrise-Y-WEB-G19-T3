@@ -13,8 +13,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+Route::post('/auth/login', [App\Http\Controllers\Api\UserAPIController::class, 'login']);
+
 Route::group([
-    'prefix' => 'categories'
+    'prefix' => 'categories',
+    'middleware' => ['auth:sanctum']
 ], function() {
     Route::get('/', [App\Http\Controllers\Api\CategoryAPIController::class, 'index'])->name('api.categories.index');
     Route::post('/', [App\Http\Controllers\Api\CategoryAPIController::class, 'store'])->name('api.categories.store');
