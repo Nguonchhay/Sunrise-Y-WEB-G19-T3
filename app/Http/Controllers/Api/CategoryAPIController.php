@@ -19,4 +19,19 @@ class CategoryAPIController extends Controller
         $category = Category::create($request->all());
         return response()->json($category);
     }
+
+    public function update(Category $category, Request $request)
+    {
+        $category->title = $request->get('title');
+        $category->save();
+        return response()->json($category);
+    }
+
+    public function destroy(Category $category, Request $request)
+    {
+        $category->delete();
+        return response()->json([
+            'message' => 'Category is deleted!'
+        ]);
+    }
 }
